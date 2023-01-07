@@ -46,7 +46,7 @@ class WardsController < ApplicationController
         render json: { message: 'Child not deleted' }, status: :unprocessable_entity
       end
     else
-      render json: { error: 'Please log in' }, status: :unauthorized
+      render json: { error: 'Not authorized' }, status: :unauthorized
     end
   end
 

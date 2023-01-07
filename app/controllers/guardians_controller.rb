@@ -16,7 +16,7 @@ class GuardiansController < ApplicationController
 
   def destroy
     if admin?
-      @guardian = Guardian.find(params[:id])
+      @guardian = current_user.guardians.find(params[:id])
       if @guardian.destroy
         render json: { message: 'guardian deleted', status: :destroyed }, status: :ok
       else
@@ -30,7 +30,7 @@ class GuardiansController < ApplicationController
   private
 
   def load_guardian
-    @guardian = Guardian.includes(:children).find(params[:id])
+    @guardian = Guardian.includes(:wards).find(params[:id])
   end
 
   def guardian_params

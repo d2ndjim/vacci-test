@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::API
-  before_action :load_user, only: [:show, :edit, :update, :destroy]
-
   def jwt_key
     Figaro.env.jwt_key
   end
@@ -36,11 +34,5 @@ class ApplicationController < ActionController::API
   end
 
   
-
-  private
-
-  def load_user
-    @user = User.find(params[:id])
-  end
 
 end
