@@ -15,6 +15,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_guardian
+    if admin?
+      if User.find_by_email(user_params[:email])
+        render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
+      else
+        @guardian = current_user.guardians.create(user_params)
+        if @guardian.save
+          token = issue_token(user)
+          render json: { user: UserSerializer.new(user), jwt: token }
+        elsif user.errors.messages
+          render json: { error: user.errors.messages }
+        else
+          render json: { error: 'User could not be created. Please try again' }
+        end
+      end
+    end
+  end
+
   private
 
   def user_params

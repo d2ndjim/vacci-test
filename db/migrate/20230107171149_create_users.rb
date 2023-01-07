@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :phone
       t.string :location
       t.string :relationship
-      t.string :email
+      t.references :guardian, foreign_key: { to_table: :users }
 
       t.timestamps
     end
