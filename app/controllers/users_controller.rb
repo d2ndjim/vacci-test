@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       else
         @guardian = current_user.guardians.create(user_params)
         if @guardian.save
-          token = issue_token(user)
-          render json: { user: UserSerializer.new(user), jwt: token }
+          token = issue_token(@guardian)
+          render json: { user: UserSerializer.new(@guardian), jwt: token }
         elsif user.errors.messages
           render json: { error: user.errors.messages }
         else

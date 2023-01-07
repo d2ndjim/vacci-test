@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :load_user, only: [:show, :edit, :update, :destroy]
-  
+
   def jwt_key
     Figaro.env.jwt_key
   end
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::API
   end
 
   def admin?
-    logged_in? && (current_user.relationship == 'mother' || current_user.relationship == 'father')
+    logged_in? && (current_user.relationship.downcase == 'mother' || current_user.relationship.downcase == 'father')
   end
 
   

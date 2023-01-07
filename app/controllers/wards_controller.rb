@@ -3,7 +3,7 @@ class WardsController < ApplicationController
     return render json: { error: 'Please log in to access this page' }, status: :unauthorized unless logged_in?
 
     @wards = current_user.wards.all
-    raise ActiveRecord::RecordNotFound unless @children
+    raise ActiveRecord::RecordNotFound unless @wards
     render json: @wards, status: :ok
   end
 
@@ -53,7 +53,7 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    params.permit(:first_name, last_name, :DOB, :gender, :height, :weight)
+    params.permit(:first_name, :last_name, :DOB, :gender, :height, :weight)
   end
 
 end
