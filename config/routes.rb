@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   post "/ward", to: "wards#create"
   get "/authorized", to: "sessions#show"
   get "/wards", to: "wards#index"
+  get "/guardians", to: "users#user_guardians"
   delete "/guardians/:id", to: "guardians#destroy"
   patch "/guardians/:id", to: "guardians#update"
+  patch "/wards/", to: "wards#update"
   delete "/wards/:id", to: "wards#destroy"
 end

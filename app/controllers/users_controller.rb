@@ -15,6 +15,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def user_guardians
+    if admin?
+      @guardians = current_user.guardians.all
+      raise ActiveRecord::RecordNotFound unless @guardians
+      render json: @guardians, status: :ok
+    else
+      render json: { error: 'Not Allowed' }, status: :unauthorized
+    end
+  end
+
   def add_guardian
     if admin?
       if User.find_by_email(user_params[:email])
