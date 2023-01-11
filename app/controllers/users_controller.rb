@@ -43,6 +43,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_guardian
+    if admin?
+      @guardian = User.find_by(guardian_id: current_user.id, id: params[:guardian_id])
+      if @guardian.destroy
+        render json: { message: 'guardian deleted', status: :destroyed }, status: :ok
+      else
+        render json: { message: 'guardian not deleted' }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: 'Not Allowed' }, status: :unauthorized
+    end
+  end
+
   private
 
   def user_params

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/authorized", to: "sessions#show"
   get "/wards", to: "wards#index"
   get "/guardians", to: "users#user_guardians"
-  delete "/guardians/:id", to: "guardians#destroy"
+  delete 'guardian/:guardian_id', to: 'users#destroy_guardian'
   patch "/guardians/:id", to: "guardians#update"
   patch "/wards/", to: "wards#update"
   delete "/wards/:id", to: "wards#destroy"
