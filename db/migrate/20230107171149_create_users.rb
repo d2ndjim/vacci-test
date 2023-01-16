@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name, null: false
       t.string :email, null: false
       t.string :password_digest, null: false
-      t.string :location, null: false,
+      t.string :location, null: false
       t.string :relationship, null: false
       t.references :guardian, foreign_key: { to_table: :users }
 
