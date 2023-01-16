@@ -10,8 +10,13 @@ class WardsController < ApplicationController
   def create
     if admin?
       @ward = current_user.wards.create(ward_params)
-      current_user.guardians.each do |guardian|
-        guardian.wards << @ward
+      if current_user.guardian_id != nil
+        @guardian = User.find(current_user.guardian_id)
+        @guardian.wards << @ward
+      else
+        current_user.guardians.each do |guardian|
+          guardian.wards << @ward
+        end
       end
       if @ward.save
         render json: @ward, status: :created
