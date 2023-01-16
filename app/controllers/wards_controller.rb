@@ -25,8 +25,8 @@ class WardsController < ApplicationController
 
   def update
     if admin?
-      @ward = current_user.wards.find(params[:id])
-      if @ward.update(child_params)
+      @ward = current_user.wards.find(update_params[:id])
+      if @ward.update(ward_params)
         render json: { message: 'Child updated', status: :updated }
       else
         render json: { message: 'Child could not be updated. Please try again' }
@@ -54,6 +54,10 @@ class WardsController < ApplicationController
 
   def ward_params
     params.permit(:first_name, :last_name, :DOB, :gender, :height, :weight)
+  end
+
+  def update_params
+    params.permit(:id, :first_name, :last_name, :DOB, :gender, :height, :weight)
   end
 
 end

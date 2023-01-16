@@ -30,9 +30,7 @@ class ApplicationController < ActionController::API
   end
 
   def admin?
-    logged_in? && (current_user.relationship.downcase == 'mother' || current_user.relationship.downcase == 'father')
+    logged_in? && (current_user.relationship.downcase == 'father' || current_user.relationship.downcase == 'mother')
   end
-
-  
 
 end

@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   get "/guardians", to: "users#user_guardians"
   delete 'guardian/:guardian_id', to: 'users#destroy_guardian'
   patch "/guardians/:id", to: "guardians#update"
-  patch "/wards/", to: "wards#update"
-  delete "/wards/:id", to: "wards#destroy"
+  patch "/ward", to: "wards#update"
+  delete "/ward/:id", to: "wards#destroy"
 end
