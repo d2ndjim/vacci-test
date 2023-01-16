@@ -31,6 +31,10 @@ class UsersController < ApplicationController
         render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
       else
         @guardian = current_user.guardians.create(user_params)
+        @wards = current_user.wards.all
+        @wards.each do |ward|
+          @guardian.wards << ward
+        end
         if @guardian.save
           token = issue_token(@guardian)
           render json: { user: UserSerializer.new(@guardian), jwt: token }
