@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :immunizations
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   post "/guardian", to: "users#add_guardian"
