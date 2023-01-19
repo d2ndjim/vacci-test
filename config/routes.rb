@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   delete 'guardian/:guardian_id', to: 'users#destroy_guardian'
   patch "/guardians/:id", to: "guardians#update"
   patch "/ward", to: "wards#update"
+  patch "/immunization", to: "immunizations#update"
   delete "/ward/:id", to: "wards#destroy"
 end
