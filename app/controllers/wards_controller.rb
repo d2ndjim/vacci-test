@@ -1,10 +1,8 @@
 class WardsController < ApplicationController
   def index
     return render json: { error: 'Please log in to access this page' }, status: :unauthorized unless logged_in?
-
     @wards = current_user.wards.all
     raise ActiveRecord::RecordNotFound unless @wards
-
     render json: @wards, status: :ok
   end
 
