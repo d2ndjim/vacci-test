@@ -1,6 +1,5 @@
 class GuardiansController < ApplicationController
   # before_action :load_guardian
-
   def update
     if admin?
       @guardian.update(guardian_params)

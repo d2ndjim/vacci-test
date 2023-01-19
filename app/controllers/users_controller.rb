@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     if admin?
       @guardians = current_user.guardians.all
       raise ActiveRecord::RecordNotFound unless @guardians
+
       render json: @guardians, status: :ok
     else
       render json: { error: 'Not Allowed' }, status: :unauthorized
@@ -26,23 +27,23 @@ class UsersController < ApplicationController
   end
 
   def add_guardian
-    if admin?
-      if User.find_by_email(user_params[:email])
-        render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
+    return unless admin?
+
+    if User.find_by_email(user_params[:email])
+      render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
+    else
+      @guardian = current_user.guardians.create(user_params)
+      @wards = current_user.wards.all
+      @wards.each do |ward|
+        @guardian.wards << ward
+      end
+      if @guardian.save
+        token = issue_token(@guardian)
+        render json: { user: UserSerializer.new(@guardian), jwt: token }
+      elsif user.errors.messages
+        render json: { error: user.errors.messages }
       else
-        @guardian = current_user.guardians.create(user_params)
-        @wards = current_user.wards.all
-        @wards.each do |ward|
-          @guardian.wards << ward
-        end
-        if @guardian.save
-          token = issue_token(@guardian)
-          render json: { user: UserSerializer.new(@guardian), jwt: token }
-        elsif user.errors.messages
-          render json: { error: user.errors.messages }
-        else
-          render json: { error: 'User could not be created. Please try again' }
-        end
+        render json: { error: 'User could not be created. Please try again' }
       end
     end
   end

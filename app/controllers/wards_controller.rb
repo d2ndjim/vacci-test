@@ -4,22 +4,24 @@ class WardsController < ApplicationController
 
     @wards = current_user.wards.all
     raise ActiveRecord::RecordNotFound unless @wards
+
     render json: @wards, status: :ok
   end
 
   def create
     if admin?
       @ward = current_user.wards.create(ward_params)
-      if current_user.guardian_id != nil
-        @guardian = User.find(current_user.guardian_id)
-        @guardian.wards << @ward
-      else
+      if current_user.guardian_id.nil?
         current_user.guardians.each do |guardian|
           guardian.wards << @ward
         end
+      else
+        @guardian = User.find(current_user.guardian_id)
+        @guardian.wards << @ward
       end
       if @ward.save
-        @ward.immunizations.create(w6: @ward.DOB + 6.weeks, w10: @ward.DOB + 10.weeks, w14: @ward.DOB + 14.weeks, m6: @ward.DOB + 6.months, m9: @ward.DOB + 9.months, m12: @ward.DOB + 12.months, m15: @ward.DOB + 15.months)
+        @ward.immunizations.create(w6: @ward.DOB + 6.weeks, w10: @ward.DOB + 10.weeks, w14: @ward.DOB + 14.weeks,
+                                   m6: @ward.DOB + 6.months, m9: @ward.DOB + 9.months, m12: @ward.DOB + 12.months, m15: @ward.DOB + 15.months)
         render json: @ward, status: :created
       else
         render json: { error: 'Child could not be created. Please try again' }
@@ -41,7 +43,6 @@ class WardsController < ApplicationController
       render json: { error: 'Not authorized' }, status: :unauthorized
     end
   end
-
 
   def destroy
     if admin?
@@ -65,5 +66,4 @@ class WardsController < ApplicationController
   def update_params
     params.permit(:id, :first_name, :last_name, :DOB, :gender, :height, :weight)
   end
-
 end
