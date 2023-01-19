@@ -19,6 +19,7 @@ class WardsController < ApplicationController
         end
       end
       if @ward.save
+        @ward.immunizations.create(w6: @ward.DOB + 6.weeks, w10: @ward.DOB + 10.weeks, w14: @ward.DOB + 14.weeks, m6: @ward.DOB + 6.months, m9: @ward.DOB + 9.months, m12: @ward.DOB + 12.months, m15: @ward.DOB + 15.months)
         render json: @ward, status: :created
       else
         render json: { error: 'Child could not be created. Please try again' }
