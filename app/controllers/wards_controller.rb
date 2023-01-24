@@ -1,8 +1,10 @@
 class WardsController < ApplicationController
   def index
     return render json: { error: 'Please log in to access this page' }, status: :unauthorized unless logged_in?
+
     @wards = current_user.wards.all
     raise ActiveRecord::RecordNotFound unless @wards
+
     render json: @wards, status: :ok
   end
 
@@ -18,8 +20,14 @@ class WardsController < ApplicationController
         @guardian.wards << @ward
       end
       if @ward.save
-        @ward.immunizations.create(w6: @ward.DOB + 6.weeks, w10: @ward.DOB + 10.weeks, w14: @ward.DOB + 14.weeks,
-                                   m6: @ward.DOB + 6.months, m9: @ward.DOB + 9.months, m12: @ward.DOB + 12.months, m15: @ward.DOB + 15.months)
+        @ward.immunizations.create(vaccination_type: 'w6', vaccination_date: @ward.DOB + 6.weeks)
+        @ward.immunizations.create(vaccination_type: 'w10', vaccination_date: @ward.DOB + 10.weeks)
+        @ward.immunizations.create(vaccination_type: 'w14', vaccination_date: @ward.DOB + 14.weeks)
+        @ward.immunizations.create(vaccination_type: 'm6', vaccination_date: @ward.DOB + 6.months)
+        @ward.immunizations.create(vaccination_type: 'm9', vaccination_date: @ward.DOB + 9.months)
+        @ward.immunizations.create(vaccination_type: 'm12', vaccination_date: @ward.DOB + 12.months)
+        @ward.immunizations.create(vaccination_type: 'm15', vaccination_date: @ward.DOB + 15.months)
+        
         render json: @ward, status: :created
       else
         render json: { error: 'Child could not be created. Please try again' }
