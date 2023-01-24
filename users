@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/d2ndjim/projects/vacci-test/app/sidekiq/immunization_schedule_reminder_job.rb:10 ImmunizationScheduleReminderJob#perform:
+
+     [1;34m5[0m:     
+     [1;34m6[0m:     immunizations = [1;34;4mImmunization[0m.where([35mw6[0m: [1;34;4mDate[0m.today + [1;34m1[0m.day)
+     [1;34m7[0m:     immunizations.each [32mdo[0m |immunization|
+     [1;34m8[0m:       ward = [1;34;4mWard[0m.find(immunization.ward_id)
+     [1;34m9[0m:       users = ward.user
+ => [1;34m10[0m:       binding.pry
+    [1;34m11[0m:       [1;34;4mImmunizationScheduleMailer[0m.reminder_email(users, ward, schedule.w6).deliver_now
+    [1;34m12[0m:     [32mend[0m
+    [1;34m13[0m:   [1;34m#   schedule = Immunization.where(ward_id: ward_id)[0m
+    [1;34m14[0m:   [1;34m#   ward = Ward.find(ward_id)[0m
+    [1;34m15[0m:   [1;34m#   users = ward.user[0m
+

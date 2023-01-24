@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   resources :immunizations
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
