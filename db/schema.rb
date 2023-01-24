@@ -15,13 +15,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
   enable_extension "plpgsql"
 
   create_table "immunizations", force: :cascade do |t|
-    t.date "w6"
-    t.date "w10"
-    t.date "w14"
-    t.date "m6"
-    t.date "m9"
-    t.date "m12"
-    t.date "m15"
+    t.string "vaccination_type"
+    t.date "vaccination_date"
     t.bigint "ward_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

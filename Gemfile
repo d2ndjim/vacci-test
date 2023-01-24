@@ -9,6 +9,11 @@ gem 'rails', '~> 7.0.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
+gem 'redis', '~> 5.0', '>= 5.0.6'
+gem 'sidekiq', '~> 7.0', '>= 7.0.3'
+gem 'sidekiq-cron', '~> 1.9', '>= 1.9.1'
+gem 'pry', '~> 0.14.1'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
@@ -26,6 +31,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootsnap', require: false
 
 gem 'figaro', '~> 1.2'
+
+gem 'mail'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
