@@ -24,12 +24,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.string "location", null: false
-    t.string "relationship", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "location", default: "Nigeria"
+    t.string "relationship"
     t.bigint "guardian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
