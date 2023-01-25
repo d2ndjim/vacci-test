@@ -9,6 +9,6 @@ class Ward < ApplicationRecord
     ward.immunizations.create(vaccination_type: 'm6', vaccination_date: ward.date_of_birth + 6.months)
     ward.immunizations.create(vaccination_type: 'm9', vaccination_date: ward.date_of_birth + 9.months)
     ward.immunizations.create(vaccination_type: 'm12', vaccination_date: ward.date_of_birth + 12.months)
-    ward.immunizations.create(vaccination_type: 'm15', vaccination_date: ward.date_of_birth + 15.months) 
+    ward.immunizations.create(vaccination_type: 'm15', vaccination_date: ward.date_of_birth + 15.months)
   end
 end

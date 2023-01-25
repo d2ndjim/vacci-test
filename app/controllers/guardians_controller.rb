@@ -3,6 +3,7 @@ class GuardiansController < ApplicationController
 
   def create
     return unless admin?
+
     if User.find_by_email(guardian_params[:email])
       render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
     else
@@ -21,7 +22,6 @@ class GuardiansController < ApplicationController
       end
     end
   end
-
 
   def update
     if admin?
@@ -48,7 +48,6 @@ class GuardiansController < ApplicationController
       render json: { error: 'Not Allowed' }, status: :unauthorized
     end
   end
-
 
   private
 
