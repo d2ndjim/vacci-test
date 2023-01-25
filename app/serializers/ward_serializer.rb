@@ -1,3 +1,3 @@
 class WardSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :DOB, :gender, :height, :weight
+  attributes :id, :first_name, :last_name, :date_of_birth, :gender, :height, :weight
 end

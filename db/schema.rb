@@ -46,10 +46,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
   end
 
   create_table "wards", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.date "DOB", null: false
-    t.string "gender", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "gender"
     t.decimal "height"
     t.decimal "weight"
     t.datetime "created_at", null: false

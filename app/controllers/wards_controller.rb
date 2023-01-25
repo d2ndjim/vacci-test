@@ -20,14 +20,7 @@ class WardsController < ApplicationController
         @guardian.wards << @ward
       end
       if @ward.save
-        @ward.immunizations.create(vaccination_type: 'w6', vaccination_date: @ward.DOB + 6.weeks)
-        @ward.immunizations.create(vaccination_type: 'w10', vaccination_date: @ward.DOB + 10.weeks)
-        @ward.immunizations.create(vaccination_type: 'w14', vaccination_date: @ward.DOB + 14.weeks)
-        @ward.immunizations.create(vaccination_type: 'm6', vaccination_date: @ward.DOB + 6.months)
-        @ward.immunizations.create(vaccination_type: 'm9', vaccination_date: @ward.DOB + 9.months)
-        @ward.immunizations.create(vaccination_type: 'm12', vaccination_date: @ward.DOB + 12.months)
-        @ward.immunizations.create(vaccination_type: 'm15', vaccination_date: @ward.DOB + 15.months)
-        
+        Ward.immunization_schedules(@ward)
         render json: @ward, status: :created
       else
         render json: { error: 'Child could not be created. Please try again' }
@@ -66,10 +59,10 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    params.permit(:first_name, :last_name, :DOB, :gender, :height, :weight)
+    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight)
   end
 
   def update_params
-    params.permit(:id, :first_name, :last_name, :DOB, :gender, :height, :weight)
+    params.permit(:id, :first_name, :last_name, :date_of_birth, :gender, :height, :weight)
   end
 end
