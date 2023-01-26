@@ -2,6 +2,8 @@ class Ward < ApplicationRecord
   has_and_belongs_to_many :user
   has_many :immunizations
 
+  has_one_attached :avatar
+
   def self.immunization_schedules(ward)
     ward.immunizations.create(vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
     ward.immunizations.create(vaccination_type: 'w10', vaccination_date: ward.date_of_birth + 10.weeks)
