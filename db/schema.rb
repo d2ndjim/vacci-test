@@ -10,17 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_181759) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "immunizations", force: :cascade do |t|
+    t.string "vaccination_type"
+    t.date "vaccination_date"
+    t.bigint "ward_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ward_id"], name: "index_immunizations_on_ward_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.string "location", null: false
-    t.string "relationship", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password_digest"
+    t.string "location", default: "Nigeria"
+    t.string "relationship"
     t.bigint "guardian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -37,15 +46,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_181759) do
   end
 
   create_table "wards", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.date "DOB", null: false
-    t.string "gender", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "gender"
     t.decimal "height"
     t.decimal "weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "immunizations", "wards"
   add_foreign_key "users", "users", column: "guardian_id"
 end

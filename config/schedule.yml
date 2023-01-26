@@ -1,0 +1,3 @@
+email_delivery:
+  cron: "*/2 * * * *"
+  class: "ImmunizationScheduleReminderJob"

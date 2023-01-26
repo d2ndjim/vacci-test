@@ -4,21 +4,23 @@ class WardsController < ApplicationController
 
     @wards = current_user.wards.all
     raise ActiveRecord::RecordNotFound unless @wards
+
     render json: @wards, status: :ok
   end
 
   def create
     if admin?
       @ward = current_user.wards.create(ward_params)
-      if current_user.guardian_id != nil
-        @guardian = User.find(current_user.guardian_id)
-        @guardian.wards << @ward
-      else
+      if current_user.guardian_id.nil?
         current_user.guardians.each do |guardian|
           guardian.wards << @ward
         end
+      else
+        @guardian = User.find(current_user.guardian_id)
+        @guardian.wards << @ward
       end
       if @ward.save
+        Ward.immunization_schedules(@ward)
         render json: @ward, status: :created
       else
         render json: { error: 'Child could not be created. Please try again' }
@@ -41,7 +43,6 @@ class WardsController < ApplicationController
     end
   end
 
-
   def destroy
     if admin?
       @ward = current_user.wards.find(params[:id])
@@ -58,11 +59,10 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    params.permit(:first_name, :last_name, :DOB, :gender, :height, :weight)
+    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight)
   end
 
   def update_params
-    params.permit(:id, :first_name, :last_name, :DOB, :gender, :height, :weight)
+    params.permit(:id, :first_name, :last_name, :date_of_birth, :gender, :height, :weight)
   end
-
 end

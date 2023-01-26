@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require 'sidekiq/api'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +24,9 @@ module VacciTest
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore, key: '_session_id'
+    # config.middleware.use ActionDispatch::Flash
+    config.active_job.queue_adapter = :sidekiq
   end
 end
