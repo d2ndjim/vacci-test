@@ -20,6 +20,9 @@ class WardsController < ApplicationController
         @guardian.wards << @ward
       end
       if @ward.save
+        if params[:avatar]
+          @ward.avatar.attach(params[:avatar])
+        end
         Ward.immunization_schedules(@ward)
         render json: @ward, status: :created
       else
@@ -69,7 +72,7 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight)
+    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
   end
 
   def update_params

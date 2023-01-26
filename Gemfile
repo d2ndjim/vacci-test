@@ -11,6 +11,9 @@ gem 'redis', '~> 5.0', '>= 5.0.6'
 gem 'sidekiq', '~> 7.0', '>= 7.0.3'
 gem 'sidekiq-cron', '~> 1.9', '>= 1.9.1'
 
+gem 'activestorage-cloudinary-service', '~> 0.2.3'
+gem 'cloudinary', '~> 1.23'
+
 gem 'jwt'
 
 gem 'active_model_serializers'
