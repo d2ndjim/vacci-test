@@ -15,6 +15,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def upload_avatar
+    if logged_in?
+      current_user.avatar.attach(params[:avatar])
+      render json: { message: 'Image Uploaded' }, status: :ok
+    else
+      render json: { error: 'You are not logged in' }, status: :unauthorized
+    end
+  end
+
   def user_guardians
     if admin?
       @guardians = current_user.guardians.all

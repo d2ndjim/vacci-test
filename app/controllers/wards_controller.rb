@@ -30,6 +30,16 @@ class WardsController < ApplicationController
     end
   end
 
+  def upload_avatar
+    if logged_in?
+      @ward = current_user.wards.find(params[:id])
+      @ward.avatar.attach(params[:avatar])
+      render json: { message: 'Image Uploaded' }, status: :ok
+    else
+      render json: { error: 'You are not logged in' }, status: :unauthorized
+    end
+  end
+
   def update
     if admin?
       @ward = current_user.wards.find(update_params[:id])
