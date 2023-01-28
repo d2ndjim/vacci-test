@@ -1,8 +1,14 @@
 class Ward < ApplicationRecord
+  
   has_and_belongs_to_many :user
-  has_many :immunizations
+  has_many :immunizations, dependent: :destroy
+
 
   has_one_attached :avatar
+
+  def avatar_url
+    Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
+  end
 
   def self.immunization_schedules(ward)
     ward.immunizations.create(vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
