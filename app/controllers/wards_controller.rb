@@ -20,9 +20,6 @@ class WardsController < ApplicationController
         @guardian.wards << @ward
       end
       if @ward.save
-        if params[:avatar]
-          @ward.avatar.attach(params[:avatar])
-        end
         Ward.immunization_schedules(@ward)
         render json: @ward, status: :created
       else
@@ -30,16 +27,6 @@ class WardsController < ApplicationController
       end
     else
       render json: { error: 'Not authorized to create child' }, status: :unauthorized
-    end
-  end
-
-  def upload_avatar
-    if logged_in?
-      @ward = current_user.wards.find(params[:id])
-      @ward.avatar.attach(params[:avatar])
-      render json: { message: 'Image Uploaded' }, status: :ok
-    else
-      render json: { error: 'You are not logged in' }, status: :unauthorized
     end
   end
 
@@ -76,6 +63,6 @@ class WardsController < ApplicationController
   end
 
   def update_params
-    params.permit(:id, :first_name, :last_name, :date_of_birth, :gender, :height, :weight)
+    params.permit(:id, :first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
   end
 end
