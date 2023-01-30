@@ -43,8 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_113227) do
   end
 
   create_table "immunizations", force: :cascade do |t|
+    t.string "name"
     t.string "vaccination_type"
     t.date "vaccination_date"
+    t.boolean "completed", default: false
     t.bigint "ward_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

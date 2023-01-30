@@ -17,4 +17,5 @@ class ImmunizationsController < ApplicationController
   def update_immunization_params
     params.permit(:vaccination_date)
   end
+  
 end
