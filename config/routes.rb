@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   post "/ward", to: "wards#create"
   post "/upload/avatar", to: "users#upload_avatar"
   get "/authorized", to: "sessions#show"
-  get "/wards", to: "wards#index"
+  get "user/wards", to: "wards#index"
   get "/guardians", to: "users#user_guardians"
+  get "/upcoming", to: "immunizations#upcoming"
   delete 'guardian/:guardian_id', to: 'guardians#destroy'
   patch "/guardians/:id", to: "guardians#update"
   patch "/ward", to: "wards#update"
