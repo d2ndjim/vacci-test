@@ -1,4 +1,12 @@
 class ImmunizationsController < ApplicationController
+  def index
+    @immunizations = Immunization.all
+    @filtered_immunizations = @immunizations.select do |immunization|
+      immunization.vaccination_date == Date.today + immunization.reminder_days.days
+    end
+    render json: @filtered_immunizations, status: :ok
+  end
+
   def upcoming
     @wards = current_user.wards
     @immunizations = []
@@ -11,12 +19,13 @@ class ImmunizationsController < ApplicationController
   end
 
   def update
-    if admin?
-      @immunization = Immunization.find(params[:id])
-      if @immunization.update(update_immunization_params)
-        render json: { message: 'Immunization updated', status: :updated }
+    if logged_in?
+      @wards = current_user.wards.pluck(:id)
+      @immunizations = Immunization.where(ward_id: @wards)
+      if @immunizations.update_all(reminder_days: immunization_params[:reminder_days])
+        render json: { message: 'Reminder successfully set', status: :updated }
       else
-        render json: { message: 'Immunization could not be updated. Please try again' }
+        render json: { message: 'Reminder could not be set. Please try again' }
       end
     else
       render json: { error: 'Not authorized' }, status: :unauthorized
@@ -25,7 +34,7 @@ class ImmunizationsController < ApplicationController
 
   private
 
-  def update_immunization_params
-    params.permit(:completed)
+  def immunization_params
+    params.permit(:reminder_days)
   end
 end

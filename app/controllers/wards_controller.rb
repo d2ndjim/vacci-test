@@ -51,7 +51,8 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    params.require(:ward).permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
+    # params.require(:ward).permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
+    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
   end
 
   def update_params
