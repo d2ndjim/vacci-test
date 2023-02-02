@@ -11,14 +11,6 @@ class WardsController < ApplicationController
   def create
     if admin?
       @ward = current_user.wards.create(ward_params)
-      if current_user.guardian_id.nil?
-        current_user.guardians.each do |guardian|
-          guardian.wards << @ward
-        end
-      else
-        @guardian = User.find(current_user.guardian_id)
-        @guardian.wards << @ward
-      end
       if @ward.save
         Ward.immunization_schedules(@ward)
         render json: { message: 'child created' }, status: :created

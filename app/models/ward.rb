@@ -1,6 +1,6 @@
 class Ward < ApplicationRecord
   
-  has_and_belongs_to_many :user
+  belongs_to :user
   has_many :immunizations, dependent: :destroy
 
 
