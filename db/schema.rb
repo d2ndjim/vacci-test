@@ -60,19 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_113227) do
     t.string "password_digest"
     t.string "location", default: "Nigeria"
     t.string "relationship"
-    t.bigint "guardian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guardian_id"], name: "index_users_on_guardian_id"
-  end
-
-  create_table "users_wards", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "ward_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_users_wards_on_user_id"
-    t.index ["ward_id"], name: "index_users_wards_on_ward_id"
   end
 
   create_table "wards", force: :cascade do |t|
@@ -82,12 +71,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_113227) do
     t.string "gender"
     t.decimal "height"
     t.decimal "weight"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wards_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "immunizations", "wards"
-  add_foreign_key "users", "users", column: "guardian_id"
+  add_foreign_key "wards", "users"
 end
