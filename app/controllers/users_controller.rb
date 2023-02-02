@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  
   def create
     if User.find_by_email(user_params[:email])
       render json: { message: 'Email Exist , try a diffrent one' }, status: :not_acceptable
