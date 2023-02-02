@@ -1,4 +1,15 @@
 class ImmunizationsController < ApplicationController
+  def upcoming
+    @wards = current_user.wards
+    @immunizations = []
+    @wards.each do |ward|
+      ward.immunizations.where('vaccination_date >= ?', Date.today).order(:vaccination_date).each do |immunization|
+        @immunizations << { immunization:, ward:, avatar_url: ward.avatar_url }
+      end
+    end
+    render json: @immunizations, status: :ok
+  end
+
   def update
     if admin?
       @immunization = Immunization.find(params[:id])
@@ -15,6 +26,6 @@ class ImmunizationsController < ApplicationController
   private
 
   def update_immunization_params
-    params.permit(:vaccination_date)
+    params.permit(:completed)
   end
 end

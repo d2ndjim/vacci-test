@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def create
     if User.find_by_email(user_params[:email])
-      render json: { error: 'Email Exist , try a diffrent one' }, status: :not_acceptable
+      render json: { message: 'Email Exist , try a diffrent one' }, status: :not_acceptable
     else
       user = User.new(user_params)
       if user.save
@@ -15,14 +15,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_guardians
-    if admin?
-      @guardians = current_user.guardians.all
-      raise ActiveRecord::RecordNotFound unless @guardians
-
-      render json: @guardians, status: :ok
+  def upload_avatar
+    if logged_in?
+      current_user.avatar.attach(params[:avatar])
+      render json: { message: 'Image Uploaded' }, status: :ok
     else
-      render json: { error: 'Not Allowed' }, status: :unauthorized
+      render json: { error: 'You are not logged in' }, status: :unauthorized
     end
   end
 

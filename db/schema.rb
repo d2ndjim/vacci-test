@@ -10,13 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_26_113227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "immunizations", force: :cascade do |t|
+    t.string "name"
     t.string "vaccination_type"
     t.date "vaccination_date"
+    t.boolean "completed", default: false
     t.bigint "ward_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,19 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
     t.string "password_digest"
     t.string "location", default: "Nigeria"
     t.string "relationship"
-    t.bigint "guardian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guardian_id"], name: "index_users_on_guardian_id"
-  end
-
-  create_table "users_wards", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "ward_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_users_wards_on_user_id"
-    t.index ["ward_id"], name: "index_users_wards_on_ward_id"
   end
 
   create_table "wards", force: :cascade do |t|
@@ -52,10 +71,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_134911) do
     t.string "gender"
     t.decimal "height"
     t.decimal "weight"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wards_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "immunizations", "wards"
-  add_foreign_key "users", "users", column: "guardian_id"
+  add_foreign_key "wards", "users"
 end

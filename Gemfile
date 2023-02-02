@@ -1,17 +1,18 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-
 ruby '3.2.0'
 gem 'pg', '~> 1.1'
 gem 'rails', '~> 7.0.4'
-
 
 gem 'pry', '~> 0.14.1'
 gem 'puma', '~> 5.0'
 gem 'redis', '~> 5.0', '>= 5.0.6'
 gem 'sidekiq', '~> 7.0', '>= 7.0.3'
 gem 'sidekiq-cron', '~> 1.9', '>= 1.9.1'
+
+gem 'activestorage-cloudinary-service', '~> 0.2.3'
+gem 'cloudinary', '~> 1.23'
 
 gem 'jwt'
 

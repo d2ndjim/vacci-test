@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password_digest
       t.string :location, default: 'Nigeria'
       t.string :relationship
-      t.references :guardian, foreign_key: { to_table: :users }
+      # t.references :guardian, foreign_key: { to_table: :users }
 
       t.timestamps
     end

@@ -7,6 +7,7 @@ class CreateWards < ActiveRecord::Migration[7.0]
       t.string :gender
       t.decimal :height
       t.decimal :weight
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
