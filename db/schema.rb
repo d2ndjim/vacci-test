@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_113227) do
     t.string "name"
     t.string "vaccination_type"
     t.date "vaccination_date"
+    t.integer "reminder_days", default: 1
     t.boolean "completed", default: false
     t.bigint "ward_id", null: false
     t.datetime "created_at", null: false
