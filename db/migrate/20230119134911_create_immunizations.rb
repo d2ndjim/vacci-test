@@ -5,7 +5,6 @@ class CreateImmunizations < ActiveRecord::Migration[7.0]
       t.string :vaccination_type  
       t.date :vaccination_date
       t.integer :reminder_days, default: 1
-      t.boolean :completed, default: false
       t.references :ward, null: false, foreign_key: true
 
       t.timestamps
