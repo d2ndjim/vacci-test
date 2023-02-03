@@ -11,5 +11,3 @@ class ImmunizationScheduleReminderJob
     end
   end
 end
-
-

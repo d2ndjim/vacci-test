@@ -45,5 +45,4 @@ class Ward < ApplicationRecord
     ward.vaccines.create(name: 'Vitamin A supplements', vaccination_type: 'm12', vaccination_date: ward.date_of_birth + 12.months)
     ward.vaccines.create(name: 'Measles vaccine', vaccination_type: 'm15', vaccination_date: ward.date_of_birth + 15.months)
   end
-  
 end
