@@ -13,6 +13,7 @@ class WardsController < ApplicationController
       @ward = current_user.wards.create(ward_params)
       if @ward.save
         Ward.immunization_schedules(@ward)
+        Ward.vaccine_trackers(@ward)
         render json: { message: 'child created' }, status: :created
       else
         render json: { message: 'Child could not be created. Please try again' }
