@@ -1,6 +1,7 @@
 class Ward < ApplicationRecord
   belongs_to :user
   has_many :immunizations, dependent: :destroy
+  has_many :vaccines, dependent: :destroy
 
   has_one_attached :avatar
 
@@ -22,5 +23,27 @@ class Ward < ApplicationRecord
     ward.immunizations.create(name: 'Measles vaccine', vaccination_type: 'm15', vaccination_date: ward.date_of_birth + 15.months)
   end
 
-  date = Date.today + 1.day
+  def self.vaccine_trackers(ward)
+    ward.vaccines.create(name: 'BCG (Baccille Calmette Guérin) vaccine', vaccination_type: 'At birth', vaccination_date: ward.date_of_birth)
+    ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: 'At birth', vaccination_date: ward.date_of_birth)
+    ward.vaccines.create(name: 'Pediatric Hepatitis B vaccine', vaccination_type: 'At birth', vaccination_date: ward.date_of_birth)
+    ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
+    ward.vaccines.create(name: 'IPV (Inactivated Polio Vaccine)', vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
+    ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: 'w6', vaccination_date: ward.date_of_birth + 6.weeks)
+    ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: 'w10', vaccination_date: ward.date_of_birth + 10.weeks)
+    ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: 'w10', vaccination_date: ward.date_of_birth + 10.weeks)
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: 'w10', vaccination_date: ward.date_of_birth + 10.weeks)
+    ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: 'w14', vaccination_date: ward.date_of_birth + 14.weeks)
+    ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: 'w14', vaccination_date: ward.date_of_birth + 14.weeks)
+    ward.vaccines.create(name: 'IPV (Inactivated Polio Vaccine)', vaccination_type: 'w14', vaccination_date: ward.date_of_birth + 14.weeks)
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: 'w14', vaccination_date: ward.date_of_birth + 14.weeks)
+    ward.vaccines.create(name: 'Vitamin A supplements', vaccination_type: 'm6', vaccination_date: ward.date_of_birth + 6.months)
+    ward.vaccines.create(name: 'Measles vaccine', vaccination_type: 'm9', vaccination_date: ward.date_of_birth + 9.months)
+    ward.vaccines.create(name: 'Meningococcal A conjugate vaccine', vaccination_type: 'm9', vaccination_date: ward.date_of_birth + 9.months)
+    ward.vaccines.create(name: 'YF (Yellow fever) vaccine', vaccination_type: 'm9', vaccination_date: ward.date_of_birth + 9.months)
+    ward.vaccines.create(name: 'Vitamin A supplements', vaccination_type: 'm12', vaccination_date: ward.date_of_birth + 12.months)
+    ward.vaccines.create(name: 'Measles vaccine', vaccination_type: 'm15', vaccination_date: ward.date_of_birth + 15.months)
+  end
+  
 end
