@@ -1,12 +1,4 @@
 class ImmunizationsController < ApplicationController
-  def index
-    @immunizations = Immunization.all
-    @filtered_immunizations = @immunizations.select do |immunization|
-      immunization.vaccination_date == Date.today + immunization.reminder_days.days
-    end
-    render json: @filtered_immunizations, status: :ok
-  end
-
   def upcoming
     @wards = current_user.wards
     @immunizations = []

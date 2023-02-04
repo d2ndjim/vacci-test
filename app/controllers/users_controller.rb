@@ -15,10 +15,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def upload_avatar
+  def update
     if logged_in?
-      current_user.avatar.attach(params[:avatar])
-      render json: { message: 'Image Uploaded' }, status: :ok
+      if current_user.update(user_update_params)
+        render json: { message: 'Profile updated successfully', status: :updated }
+      else
+        render json: { message: 'Profile could not be updated. Please try again' }
+      end
     else
       render json: { error: 'You are not logged in' }, status: :unauthorized
     end
@@ -27,6 +30,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :relationship, :email, :password)
+    params.permit(:first_name, :last_name, :relationship, :email, :password) 
+  end
+
+  def user_update_params
+    params.permit(:first_name, :last_name, :relationship, :email, :password, :avatar)
   end
 end
