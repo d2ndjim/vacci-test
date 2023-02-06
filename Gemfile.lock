@@ -187,6 +187,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    ruby_http_client (3.5.5)
+    sendgrid-ruby (6.6.2)
+      ruby_http_client (~> 3.4)
     sidekiq (7.0.3)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -222,13 +225,13 @@ DEPENDENCIES
   debug
   figaro (~> 1.2)
   jwt
-  mail
   pg (~> 1.1)
   pry (~> 0.14.1)
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)
   redis (~> 5.0, >= 5.0.6)
+  sendgrid-ruby
   sidekiq (~> 7.0, >= 7.0.3)
   sidekiq-cron (~> 1.9, >= 1.9.1)
   tzinfo-data

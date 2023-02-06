@@ -23,6 +23,11 @@ class WardsController < ApplicationController
     end
   end
 
+  def user_child
+    @ward = Ward.find(params[:id])
+    render json: @ward, status: :ok
+  end
+
   def update
     if admin?
       @ward = current_user.wards.find(update_params[:id])
@@ -52,8 +57,8 @@ class WardsController < ApplicationController
   private
 
   def ward_params
-    # params.require(:ward).permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
-    params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
+    params.require(:ward).permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
+    # params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
   end
 
   def update_params

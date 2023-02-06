@@ -1,21 +1,27 @@
 class VaccinesController < ApplicationController
   def index
-    @ward = current_user.wards.find(params[:ward_id])
+    @ward = Ward.find(params[:ward_id])
     case params[:filter]
-    when 'due'
+    when 'Due'
       @vaccines = @ward.vaccines.due
-    when 'upcoming'
+    when 'Upcoming'
       @vaccines = @ward.vaccines.upcoming
-    when 'completed'
+    when 'Completed'
       @vaccines = @ward.vaccines.completed
-    when 'all'
+    when 'All'
       @vaccines = @ward.vaccines.all
     end
-    render json: @vaccines, status: :ok
+    @grouped_vaccines = @vaccines.group_by { |vaccine| vaccine.vaccination_date }
+    grouped_vaccines_with_variable_dates = {}
+    @grouped_vaccines.each do |vaccination_date, vaccines|
+      date = vaccination_date.strftime("%Y-%m-%d")
+      grouped_vaccines_with_variable_dates[date] = vaccines
+    end
+    render json: grouped_vaccines_with_variable_dates, status: :ok
   end
 
   def update
-    @ward = current_user.wards.find(params[:ward_id])
+    @ward = Ward.find(params[:ward_id])
     @vaccine = @ward.vaccines.find(params[:id])
     if @vaccine.update(vaccine_params)
       render json: { message: 'Vaccine updated' }, status: :ok

@@ -7,5 +7,5 @@ class User < ApplicationRecord
     Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
   end
 
-  has_many :wards
+  has_many :wards, dependent: :destroy
 end
