@@ -11,10 +11,10 @@ class VaccinesController < ApplicationController
     when 'All'
       @vaccines = @ward.vaccines.all
     end
-    @grouped_vaccines = @vaccines.group_by { |vaccine| vaccine.vaccination_date }
+    @grouped_vaccines = @vaccines.group_by(&:vaccination_date)
     grouped_vaccines_with_variable_dates = {}
     @grouped_vaccines.each do |vaccination_date, vaccines|
-      date = vaccination_date.strftime("%Y-%m-%d")
+      date = vaccination_date.strftime('%Y-%m-%d')
       grouped_vaccines_with_variable_dates[date] = vaccines
     end
     render json: grouped_vaccines_with_variable_dates, status: :ok
