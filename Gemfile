@@ -26,6 +26,7 @@ gem 'bootsnap', require: false
 gem 'figaro', '~> 1.2'
 
 gem 'rspec-rails', '~> 6.0', '>= 6.0.1'
+gem 'rswag', '~> 2.8'
 
 # gem 'mail'
 gem 'rack-cors'
