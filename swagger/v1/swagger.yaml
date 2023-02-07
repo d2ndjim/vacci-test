@@ -4,6 +4,38 @@ info:
   title: VACCITRACKER API
   version: v1
 paths:
+  "/upcoming":
+    get:
+      summary: upcoming immunization
+      tags:
+      - Immunizations
+      responses:
+        '200':
+          description: successful
+  "/immunization":
+    patch:
+      summary: update immunization
+      tags:
+      - Immunizations
+      responses:
+        '200':
+          description: successful
+  "/login":
+    post:
+      summary: create session
+      tags:
+      - Sessions
+      responses:
+        '401':
+          description: successful
+  "/authorized":
+    get:
+      summary: show session
+      tags:
+      - Sessions
+      responses:
+        '200':
+          description: successful
   "/signup":
     post:
       summary: create user
@@ -17,6 +49,14 @@ paths:
       summary: update user
       tags:
       - Users
+      responses:
+        '200':
+          description: successful
+  "/vaccines":
+    get:
+      summary: index vaccine
+      tags:
+      - Vaccines
       responses:
         '200':
           description: successful
