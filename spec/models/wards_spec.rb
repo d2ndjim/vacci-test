@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Ward, type: :model do
   @user = User.create(first_name: 'Eid', last_name: 'Hachem', relationship: 'Father', email: 'test@test.com', password: '123456')
-  subject { Ward.new(first_name: 'Junior', last_name: 'Jimoh', user_id: @user, date_of_birth: '2023-01-01', gender: 'Male', weight: '20.0', height: '23.0') }
+  subject do
+    Ward.new(first_name: 'Junior', last_name: 'Jimoh', user_id: @user, date_of_birth: '2023-01-01', gender: 'Male', weight: '20.0', height: '23.0')
+  end
   before { subject.save }
 
   it 'first name should be present' do
@@ -11,7 +13,7 @@ RSpec.describe Ward, type: :model do
   end
 
   it 'last name should be present' do
-    subject.last_name = nil 
+    subject.last_name = nil
     expect(subject).to_not be_valid
   end
 
