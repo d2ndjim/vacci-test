@@ -28,7 +28,6 @@ RSpec.describe 'wards', type: :request do
             }
           }
         end
-        run_test!
       end
     end
   end
@@ -46,7 +45,6 @@ RSpec.describe 'wards', type: :request do
             }
           }
         end
-        # run_test!
       end
     end
   end

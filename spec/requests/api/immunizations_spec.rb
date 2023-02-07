@@ -12,7 +12,6 @@ RSpec.describe 'immunizations', type: :request do
             }
           }
         end
-        # run_test!
       end
     end
   end

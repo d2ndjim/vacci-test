@@ -12,7 +12,6 @@ RSpec.describe 'vaccines', type: :request do
             }
           }
         end
-        # run_test!
       end
     end
   end
