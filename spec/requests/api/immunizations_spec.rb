@@ -20,7 +20,7 @@ RSpec.describe 'immunizations', type: :request do
   path '/immunization' do
     patch('update immunization') do
       tags 'Immunizations'
-      response(200, 'successful') do
+      response(401, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

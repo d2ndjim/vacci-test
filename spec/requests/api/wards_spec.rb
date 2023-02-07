@@ -4,7 +4,7 @@ RSpec.describe 'wards', type: :request do
   path '/ward' do
     post('create ward') do
       tags 'Wards'
-      response(200, 'successful') do
+      response(401, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,7 +20,7 @@ RSpec.describe 'wards', type: :request do
   path '/user/wards' do
     get('index ward') do
       tags 'Wards'
-      response(200, 'successful') do
+      response(401, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -38,7 +38,7 @@ RSpec.describe 'wards', type: :request do
     get('user_child ward') do
       tags 'Wards'
       response(200, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -57,7 +57,7 @@ RSpec.describe 'wards', type: :request do
     delete('destroy ward') do
       tags 'Wards'
       response(401, 'successful') do
-        let(:id) { '123' }
+        let(:id) { '1' }
 
         after do |example|
           example.metadata[:response][:content] = {

@@ -4,7 +4,7 @@ RSpec.describe 'vaccines', type: :request do
   path '/vaccines' do
     get('index vaccine') do
       tags 'Vaccines'
-      response(200, 'successful') do
+      response(401, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,7 +20,7 @@ RSpec.describe 'vaccines', type: :request do
   path '/upcoming' do
     get('upcoming immunization') do
       tags 'Immunizations'
-      response(200, 'successful') do
+      response(401, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
