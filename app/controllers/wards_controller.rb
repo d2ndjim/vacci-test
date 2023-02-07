@@ -13,6 +13,7 @@ class WardsController < ApplicationController
       @ward = current_user.wards.create(ward_params)
       if @ward.save
         Ward.immunization_schedules(@ward)
+        Ward.vaccine_trackers(@ward)
         render json: { message: 'child created' }, status: :created
       else
         render json: { message: 'Child could not be created. Please try again' }
@@ -20,6 +21,11 @@ class WardsController < ApplicationController
     else
       render json: { message: 'Not authorized to create child' }, status: :unauthorized
     end
+  end
+
+  def user_child
+    @ward = Ward.find(params[:id])
+    render json: @ward, status: :ok
   end
 
   def update
@@ -52,6 +58,7 @@ class WardsController < ApplicationController
 
   def ward_params
     params.require(:ward).permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
+    # params.permit(:first_name, :last_name, :date_of_birth, :gender, :height, :weight, :avatar)
   end
 
   def update_params

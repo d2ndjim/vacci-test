@@ -8,6 +8,7 @@ gem 'rails', '~> 7.0.4'
 gem 'pry', '~> 0.14.1'
 gem 'puma', '~> 5.0'
 gem 'redis', '~> 5.0', '>= 5.0.6'
+gem 'sendgrid-ruby'
 gem 'sidekiq', '~> 7.0', '>= 7.0.3'
 gem 'sidekiq-cron', '~> 1.9', '>= 1.9.1'
 
@@ -24,7 +25,10 @@ gem 'bootsnap', require: false
 
 gem 'figaro', '~> 1.2'
 
-gem 'mail'
+gem 'rspec-rails', '~> 6.0', '>= 6.0.1'
+gem 'rswag', '~> 2.8'
+
+# gem 'mail'
 gem 'rack-cors'
 
 group :development, :test do

@@ -1,0 +1,100 @@
+---
+openapi: 3.0.1
+info:
+  title: VACCITRACKER API
+  version: v1
+paths:
+  "/upcoming":
+    get:
+      summary: upcoming immunization
+      tags:
+      - Immunizations
+      responses:
+        '200':
+          description: successful
+  "/immunization":
+    patch:
+      summary: update immunization
+      tags:
+      - Immunizations
+      responses:
+        '200':
+          description: successful
+  "/login":
+    post:
+      summary: create session
+      tags:
+      - Sessions
+      responses:
+        '401':
+          description: successful
+  "/authorized":
+    get:
+      summary: show session
+      tags:
+      - Sessions
+      responses:
+        '200':
+          description: successful
+  "/signup":
+    post:
+      summary: create user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+  "/user/update":
+    patch:
+      summary: update user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+  "/vaccines":
+    get:
+      summary: index vaccine
+      tags:
+      - Vaccines
+      responses:
+        '200':
+          description: successful
+  "/ward":
+    post:
+      summary: create ward
+      tags:
+      - Wards
+      responses:
+        '200':
+          description: successful
+  "/user/wards":
+    get:
+      summary: index ward
+      tags:
+      - Wards
+      responses:
+        '200':
+          description: successful
+  "/ward/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: user_child ward
+      tags:
+      - Wards
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: destroy ward
+      tags:
+      - Wards
+      responses:
+        '401':
+          description: successful
