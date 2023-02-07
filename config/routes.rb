@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+  
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   resources :immunizations
