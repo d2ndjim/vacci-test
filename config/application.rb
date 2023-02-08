@@ -27,6 +27,6 @@ module VacciTest
     # config.middleware.use ActionDispatch::Cookies
     # config.middleware.use ActionDispatch::Session::CookieStore, key: '_session_id'
     # config.middleware.use ActionDispatch::Flash
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
   end
 end

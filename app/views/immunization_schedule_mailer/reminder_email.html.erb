@@ -1,1 +1,10 @@
-<h1>Test Vaccitracker</h1>
+<div>
+  <p>Dear <%= @user.first_name + @user.last_name %></p>
+  <p>We hope this email finds you well. We wanted to remind you that your child, <%= @ward.first_name + @ward.last_name %>, has an upcoming vaccination appointment.</p>
+  <p>Date: <%= @schedule.appointment_date %></p>
+  <p>It's important to keep your child's vaccinations up-to-date in order to protect their health and prevent the spread of preventable diseases.</p>
+  <p>If you need to reschedule or have any questions about the appointment, please reach out to your clinic directly.</p>
+  <p>Thank you for using Vaccitracker to help keep your family healthy and protected.</p>
+  <p>Best regards,</p>
+  <p>The Vaccitracker Team</p>
+</div>
