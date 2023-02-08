@@ -87,4 +87,7 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = {
     host: 'https://vaccitracker.herokuapp.com/'
   }
+
+  config.action_mailer.default_url_options = { host: 'https://vaccitracker.herokuapp.com/' }
+
 end
