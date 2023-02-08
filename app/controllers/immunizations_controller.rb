@@ -10,6 +10,13 @@ class ImmunizationsController < ApplicationController
     render json: @immunizations, status: :ok
   end
 
+  def reminder_days
+    @ward = current_user.wards.first
+    @immunizations = @ward.immunizations.first
+    reminder = @immunizations.reminder_days
+    render json: reminder, status: :ok
+  end
+
   def update
     if logged_in?
       @wards = current_user.wards.pluck(:id)

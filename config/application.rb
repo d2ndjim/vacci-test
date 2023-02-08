@@ -1,7 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
-require 'sidekiq/api'
+# require 'sidekiq/api'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
