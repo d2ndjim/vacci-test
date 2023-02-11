@@ -37,15 +37,15 @@ class Ward < ApplicationRecord
     ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: '6 Weeks', vaccination_date: ward.date_of_birth + 6.weeks)
     ward.vaccines.create(name: 'IPV (Inactivated Polio Vaccine)', vaccination_type: '6 Weeks', vaccination_date: ward.date_of_birth + 6.weeks)
     ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: '6 Weeks', vaccination_date: ward.date_of_birth + 6.weeks)
-    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: '6 Weeks', vaccination_date: ward.date_of_birth + 6.weeks)
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal C vaccine)', vaccination_type: '6 Weeks', vaccination_date: ward.date_of_birth + 6.weeks)
     ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: '10 Weeks', vaccination_date: ward.date_of_birth + 10.weeks)
     ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: '10 Weeks', vaccination_date: ward.date_of_birth + 10.weeks)
-    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: '10 Weeks',
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal C vaccine)', vaccination_type: '10 Weeks',
                          vaccination_date: ward.date_of_birth + 10.weeks)
     ward.vaccines.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine', vaccination_type: '14 Weeks', vaccination_date: ward.date_of_birth + 14.weeks)
     ward.vaccines.create(name: 'OPV (Oral Polio Vaccine)', vaccination_type: '14 Weeks', vaccination_date: ward.date_of_birth + 14.weeks)
     ward.vaccines.create(name: 'IPV (Inactivated Polio Vaccine)', vaccination_type: '14 Weeks', vaccination_date: ward.date_of_birth + 14.weeks)
-    ward.vaccines.create(name: 'PCV-10 (Pneumococcal conjugate vaccine)', vaccination_type: '14 Weeks',
+    ward.vaccines.create(name: 'PCV-10 (Pneumococcal C vaccine)', vaccination_type: '14 Weeks',
                          vaccination_date: ward.date_of_birth + 14.weeks)
     ward.vaccines.create(name: 'Vitamin A supplements', vaccination_type: '6 Months', vaccination_date: ward.date_of_birth + 6.months)
     ward.vaccines.create(name: 'Measles vaccine', vaccination_type: '9 Months', vaccination_date: ward.date_of_birth + 9.months)
