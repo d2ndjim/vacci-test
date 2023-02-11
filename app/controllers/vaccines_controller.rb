@@ -9,7 +9,7 @@ class VaccinesController < ApplicationController
     when 'Completed'
       @vaccines = @ward.vaccines.completed
     when 'All'
-      @vaccines = @ward.vaccines.all
+      @vaccines = @ward.vaccines.all.order('vaccination_date ASC')
     end
     @grouped_vaccines = @vaccines.group_by(&:vaccination_date)
     grouped_vaccines_with_variable_dates = {}

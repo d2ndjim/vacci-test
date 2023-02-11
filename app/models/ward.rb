@@ -16,6 +16,11 @@ class Ward < ApplicationRecord
     Rails.application.routes.url_helpers.url_for(avatar) if avatar.attached?
   end
 
+  def age
+    now = Time.now.utc.to_date
+    now.year - date_of_birth.year - (date_of_birth.to_date.change(:year => now.year) > now ? 1 : 0)
+  end
+
   def self.immunization_schedules(ward)
     ward.immunizations.create(name: 'DTwP-Hib-HepB (Whole cell) vaccine, IPV, OPV and PCV-10', vaccination_type: 'w6',
                               vaccination_date: ward.date_of_birth + 6.weeks)

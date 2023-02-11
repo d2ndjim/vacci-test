@@ -5,7 +5,7 @@ class WardsController < ApplicationController
     @wards = current_user.wards.all
     raise ActiveRecord::RecordNotFound unless @wards
 
-    render json: @wards, status: :ok
+    render json: @wards, methods: :age, status: :ok
   end
 
   def create
