@@ -16,6 +16,4 @@ test:
 
 production:
   <<: *default
-  database: vacci_test_production
-  username: vacci_test
-  password: <%= ENV["VACCI_TEST_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
